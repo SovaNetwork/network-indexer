@@ -44,10 +44,10 @@ ENV WEBHOOK_URL="http://hyperstate-utxos:5557/hook" \
     RPC_USER="user" \
     RPC_PASSWORD="password"
 
-# Use ENTRYPOINT and CMD combination for better argument handling
-ENTRYPOINT ["hyperstate-indexer"]
-CMD ["--webhook-url", "$WEBHOOK_URL", \
-     "--rpc-host", "$RPC_HOST", \
-     "--rpc-port", "$RPC_PORT", \
-     "--rpc-user", "$RPC_USER", \
-     "--rpc-password", "$RPC_PASSWORD"]
+# Use shell form to allow environment variable expansion
+CMD hyperstate-indexer \
+    --webhook-url "$WEBHOOK_URL" \
+    --rpc-host "$RPC_HOST" \
+    --rpc-port "$RPC_PORT" \
+    --rpc-user "$RPC_USER" \
+    --rpc-password "$RPC_PASSWORD"

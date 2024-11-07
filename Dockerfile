@@ -40,7 +40,7 @@ ENV RUST_LOG=info
 # Set default values for arguments
 ENV WEBHOOK_URL="http://hyperstate-utxos:5557/hook" \
     RPC_HOST="bitcoin" \
-    RPC_PORT="18443" \
+    RPC_PORT=18443 \
     RPC_USER="user" \
     RPC_PASSWORD="password"
 

@@ -9,6 +9,7 @@ use log::{info, error};
 use serde::Serialize;
 use tokio;
 use reqwest;
+use clap::Parser;
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -85,6 +86,25 @@ impl From<reqwest::Error> for IndexerError {
 }
 
 type Result<T> = std::result::Result<T, IndexerError>;
+
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+    #[arg(long, default_value = "http://hyperstate-utxos:5557/hook")]
+    webhook_url: String,
+    
+    #[arg(long, default_value = "user")]
+    rpc_user: String,
+    
+    #[arg(long, default_value = "password")]
+    rpc_password: String,
+    
+    #[arg(long, default_value = "localhost")]
+    rpc_host: String,
+    
+    #[arg(long, default_value = "18443")]
+    rpc_port: u16,
+}
 
 #[derive(Debug, Serialize)]
 struct BlockUpdate {
@@ -350,13 +370,15 @@ fn extract_public_key(witness: &bitcoincore_rpc::bitcoin::Witness) -> Option<Str
 async fn main() -> std::result::Result<(), Box<dyn Error>> {
     env_logger::init();
 
+    let args = Args::parse();
+
     let mut indexer = BitcoinIndexer::new(
         Network::Regtest,
-        "user",
-        "password",
-        "localhost",
-        18443,
-        "http://localhost:5557/hook",
+        &args.rpc_user,
+        &args.rpc_password,
+        &args.rpc_host,
+        args.rpc_port,
+        &args.webhook_url,
         0, // Start from genesis block
     )?;
 

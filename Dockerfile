@@ -37,5 +37,17 @@ USER service
 # Set environment variables
 ENV RUST_LOG=info
 
-# Run the binary
-CMD ["hyperstate-indexer"]
+# Set default values for arguments
+ENV WEBHOOK_URL="http://hyperstate-utxos:5557/hook" \
+    RPC_HOST="bitcoin" \
+    RPC_PORT="18443" \
+    RPC_USER="user" \
+    RPC_PASSWORD="password"
+
+# Use ENTRYPOINT and CMD combination for better argument handling
+ENTRYPOINT ["hyperstate-indexer"]
+CMD ["--webhook-url", "$WEBHOOK_URL", \
+     "--rpc-host", "$RPC_HOST", \
+     "--rpc-port", "$RPC_PORT", \
+     "--rpc-user", "$RPC_USER", \
+     "--rpc-password", "$RPC_PASSWORD"]

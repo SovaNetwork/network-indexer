@@ -104,6 +104,9 @@ struct Args {
     
     #[arg(long, default_value = "18443")]
     rpc_port: u16,
+
+    #[arg(long, default_value = "0")]
+    start_height: i32,
 }
 
 #[derive(Debug, Serialize)]
@@ -379,7 +382,7 @@ async fn main() -> std::result::Result<(), Box<dyn Error>> {
         &args.rpc_host,
         args.rpc_port,
         &args.webhook_url,
-        0, // Start from genesis block
+        args.start_height, // Start from genesis block
     )?;
 
     indexer.run(Duration::from_secs(10)).await?;

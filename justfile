@@ -18,4 +18,5 @@ run-full:
         --rpc-user "user" \
         --rpc-password "password" \
         --rpc-host "bitcoin" \
-        --rpc-port "18443"
+        --rpc-port "18443" \
+        --start-height "0"

@@ -90,7 +90,7 @@ type Result<T> = std::result::Result<T, IndexerError>;
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-    #[arg(long, default_value = "http://hyperstate-utxos:5557/hook")]
+    #[arg(long, default_value = "http://network-utxos:5557/hook")]
     webhook_url: String,
     
     #[arg(long, default_value = "user")]

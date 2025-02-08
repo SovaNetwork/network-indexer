@@ -28,7 +28,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy the binary from builder
-COPY --from=builder /usr/src/app/target/release/hyperstate-indexer /usr/local/bin/
+COPY --from=builder /usr/src/app/target/release/network-indexer /usr/local/bin/
 
 # Create a non-root user with specific UID
 RUN useradd -m -u 1001 service
@@ -38,14 +38,14 @@ USER service
 ENV RUST_LOG=info
 
 # Set default values for arguments
-ENV WEBHOOK_URL="http://hyperstate-utxos:5557/hook" \
+ENV WEBHOOK_URL="http://network-utxos:5557/hook" \
     RPC_HOST="bitcoin" \
     RPC_PORT=18443 \
     RPC_USER="user" \
     RPC_PASSWORD="password"
 
 # Use shell form to allow environment variable expansion
-CMD hyperstate-indexer \
+CMD network-indexer \
     --webhook-url "$WEBHOOK_URL" \
     --rpc-host "$RPC_HOST" \
     --rpc-port "$RPC_PORT" \

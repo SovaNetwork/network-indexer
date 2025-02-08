@@ -9,12 +9,12 @@ run *ARGS:
 
 # Example usage with webhook URL
 run-with-webhook:
-    RUST_LOG=info cargo run --release -- --webhook-url "http://hyperstate-utxos:5557/hook"
+    RUST_LOG=info cargo run --release -- --webhook-url "http://network-utxos:5557/hook"
 
 # Example usage with all parameters
 run-full:
     RUST_LOG=info cargo run --release -- \
-        --webhook-url "http://hyperstate-utxos:5557/hook" \
+        --webhook-url "http://network-utxos:5557/hook" \
         --rpc-user "user" \
         --rpc-password "password" \
         --rpc-host "bitcoin" \

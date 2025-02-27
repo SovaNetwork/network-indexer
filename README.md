@@ -1,3 +1,6 @@
+# ⚠️ IMPORTANT: THIS SERVICE HAS BEEN ARCHIVED AND MOVED ⚠️
+# Please go to: https://github.com/SovaNetwork/utxo-tracing
+
 # Bitcoin UTXO Indexer
 
 A Bitcoin UTXO indexer that monitors and tracks the creation and spending of UTXOs. This tool processes Bitcoin blocks in real-time and sends updates to a specified webhook endpoint.
